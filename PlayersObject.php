@@ -64,6 +64,13 @@ class PlayerArrayReader implements PlayerSourceReader {
     }
 }
 
+class PlayerJsonReader implements PlayerSourceReader {
+    public function read() {
+        $json = '[{"name":"Jonas Valenciunas","age":26,"job":"Center","salary":"4.66m"},{"name":"Kyle Lowry","age":32,"job":"Point Guard","salary":"28.7m"},{"name":"Demar DeRozan","age":28,"job":"Shooting Guard","salary":"26.54m"},{"name":"Jakob Poeltl","age":22,"job":"Center","salary":"2.704m"}]';
+        return $json;
+    }
+}
+
 class PlayersObject implements IReadWritePlayers {
 
     private $playersArray;
@@ -92,7 +99,8 @@ class PlayersObject implements IReadWritePlayers {
                 $playerData = $reader->read();
                 break;
             case 'json':
-                $playerData = $this->getPlayerDataJson();
+                $reader = new PlayerJsonReader();
+                $playerData = $reader->read();
                 break;
             case 'file':
                 $playerData = $this->getPlayerDataFromFile($filename);
@@ -136,10 +144,6 @@ class PlayersObject implements IReadWritePlayers {
         }
     }
 
-    function getPlayerDataJson() {
-        $json = '[{"name":"Jonas Valenciunas","age":26,"job":"Center","salary":"4.66m"},{"name":"Kyle Lowry","age":32,"job":"Point Guard","salary":"28.7m"},{"name":"Demar DeRozan","age":28,"job":"Shooting Guard","salary":"26.54m"},{"name":"Jakob Poeltl","age":22,"job":"Center","salary":"2.704m"}]';
-        return $json;
-    }
 
     function getPlayerDataFromFile($filename) {
         $file = file_get_contents($filename);
