@@ -58,31 +58,30 @@ class PlayersObject implements IReadWritePlayers {
                 $writer->write();
                 break;
             case 'json':
-                $players = [];
-                if ($this->playerJsonString) {
-                    $players = json_decode($this->playerJsonString);
-                }
-                $players[] = $player;
-                $this->playerJsonString = json_encode($player);
+                $writer = new PlayerJsonWriter($player, $this);
+                $writer->write();
                 break;
             case 'file':
-                $players = json_decode($this->getPlayerDataFromFile($filename));
-                if (!$players) {
-                    $players = [];
-                }
-                $players[] = $player;
-                file_put_contents($filename, json_encode($players));
+                $writer = new PlayerFileWriter($player, $filename);
+                $writer->write();
                 break;
         }
     }
 
-    function appendPlayersArray($player) {
-        $this->playersArray[] = $player;
+    function getPlayersArray() {
+        return $this->playerArray;
     }
 
-    function getPlayerDataFromFile($filename) {
-        $file = file_get_contents($filename);
-        return $file;
+    function getPlayerJsonString() {
+        return $this->playerJsonString;
+    }
+
+    function setPlayersArray($playersArray) {
+        $this->playersArray = $playersArray;
+    }
+
+    function setPlayerJsonString($playerJsonString) {
+        $this->playerJsonString = $playerJsonString;
     }
 
     function display($isCLI, $source, $filename = null) {

@@ -49,6 +49,7 @@ $playersObject->writePlayer('json', $player);
 echo "\t======Testing writing to file=====\n";
 $playersObject = new PlayersObject();
 $playersObject->writePlayer('file', $player, "playersDataTest.json");
+// Clear file.
 file_put_contents("playersDataTest.json", "");
 
 ?>
