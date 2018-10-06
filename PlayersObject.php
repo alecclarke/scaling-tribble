@@ -36,29 +36,14 @@ class PlayersObject implements IReadWritePlayers {
      * @return string json
      */
     function readPlayers($source, $filename = null) {
-        $playerData = null;
-
-        switch ($source) {
-            case 'array':
-                $reader = new PlayerArrayReader();
-                $playerData = $reader->read();
-                break;
-            case 'json':
-                $reader = new PlayerJsonReader();
-                $playerData = $reader->read();
-                break;
-            case 'file':
-                $reader = new PlayerFileReader($filename);
-                $playerData = $reader->read();
-                break;
-        }
+        $sourceReader = SourceReaderFactory::getReader($source, $filename);
+        $playerData = $sourceReader->read();
 
         if (is_string($playerData)) {
             $playerData = json_decode($playerData);
         }
 
         return $playerData;
-
     }
 
     /**
