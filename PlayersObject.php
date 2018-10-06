@@ -54,7 +54,8 @@ class PlayersObject implements IReadWritePlayers {
     function writePlayer($source, $player, $filename = null) {
         switch ($source) {
             case 'array':
-                $this->playersArray[] = $player;
+                $writer = new PlayerArrayWriter($player, $this);
+                $writer->write();
                 break;
             case 'json':
                 $players = [];
@@ -73,6 +74,10 @@ class PlayersObject implements IReadWritePlayers {
                 file_put_contents($filename, json_encode($players));
                 break;
         }
+    }
+
+    function appendPlayersArray($player) {
+        $this->playersArray[] = $player;
     }
 
     function getPlayerDataFromFile($filename) {
