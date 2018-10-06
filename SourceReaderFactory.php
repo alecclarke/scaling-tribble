@@ -12,8 +12,9 @@ I'm sure there's a much more elegant and standard way of including these files.
 This is a gap in my php knowledge.
 
 */
+
 spl_autoload_register(function ($class) {
-    include 'services/source-readers/' . $class . '.php';
+    include 'services/source_readers/' . $class . '.php';
 });
 
 class SourceReaderFactory {
