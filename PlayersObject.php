@@ -71,6 +71,19 @@ class PlayerJsonReader implements PlayerSourceReader {
     }
 }
 
+class PlayerFileReader implements PlayerSourceReader {
+    private $filename;
+
+    public function __construct($filename) {
+        $this->filename = $filename;
+    }
+
+    public function read() {
+        $file = file_get_contents($this->filename);
+        return $file;
+    }
+}
+
 class PlayersObject implements IReadWritePlayers {
 
     private $playersArray;
@@ -103,7 +116,8 @@ class PlayersObject implements IReadWritePlayers {
                 $playerData = $reader->read();
                 break;
             case 'file':
-                $playerData = $this->getPlayerDataFromFile($filename);
+                $reader = new PlayerFileReader($file);
+                $playerData = $reader->read();
                 break;
         }
 
@@ -143,7 +157,6 @@ class PlayersObject implements IReadWritePlayers {
                 break;
         }
     }
-
 
     function getPlayerDataFromFile($filename) {
         $file = file_get_contents($filename);
