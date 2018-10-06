@@ -85,14 +85,8 @@ class PlayersObject implements IReadWritePlayers {
         $players = $this->readPlayers($source, $filename);
 
         if ($isCLI) {
-            echo "Current Players: \n";
-            foreach ($players as $player) {
-
-                echo "\tName: $player->name\n";
-                echo "\tAge: $player->age\n";
-                echo "\tSalary: $player->salary\n";
-                echo "\tJob: $player->job\n\n";
-            }
+            $view = new PlayerCLIView($players);
+            $view->display();
         } else {
             $view = new PlayerHTMLView($players);
             $view->display();
