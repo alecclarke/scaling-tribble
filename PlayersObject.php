@@ -81,16 +81,9 @@ class PlayersObject implements IReadWritePlayers {
     }
 
     function display($isCLI, $source, $filename = null) {
-
         $players = $this->readPlayers($source, $filename);
-
-        if ($isCLI) {
-            $view = new PlayerCLIView($players);
-            $view->display();
-        } else {
-            $view = new PlayerHTMLView($players);
-            $view->display();
-        }
+        $view = PlayerViewFactory::getView($isCLI,$players);
+        $view->display();
     }
 
 }
