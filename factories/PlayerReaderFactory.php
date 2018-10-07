@@ -1,8 +1,4 @@
 <?php
-spl_autoload_register(function ($class) {
-    include '../services/player_readers/' . $class . '.php';
-});
-
 class PlayerReaderFactory {
   public static function getReader($source, $filename = null) {
     switch ($source) {

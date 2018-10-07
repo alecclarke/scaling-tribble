@@ -6,8 +6,12 @@ I'm sure there's a much more elegant and standard way of including these files.
 This is a gap in my php knowledge (something I'll do some research on).
 
 */
+set_include_path(
+    __DIR__ . "/factories" . ":" . __DIR__ . "/views" . ":" . __DIR__ . "/services/player_readers" . ":" . __DIR__ . "/services/player_writers"
+);
+
 spl_autoload_register(function ($class) {
-    include 'factories/' . $class . '.php';
+    include $class . '.php';
 });
 
 interface IReadWritePlayers {
