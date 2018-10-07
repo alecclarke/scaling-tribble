@@ -52,20 +52,8 @@ class PlayersObject implements IReadWritePlayers {
      * @param $player \stdClass Class implementation of the player with name, age, job, salary.
      */
     function writePlayer($source, $player, $filename = null) {
-        switch ($source) {
-            case 'array':
-                $writer = new PlayerArrayWriter($player, $this);
-                $writer->write();
-                break;
-            case 'json':
-                $writer = new PlayerJsonWriter($player, $this);
-                $writer->write();
-                break;
-            case 'file':
-                $writer = new PlayerFileWriter($player, $filename);
-                $writer->write();
-                break;
-        }
+        $writer = PlayerWriterFactory::getWriter($source, $player, $this, $filename);
+        $writer->write();
     }
 
     function getPlayersArray() {
