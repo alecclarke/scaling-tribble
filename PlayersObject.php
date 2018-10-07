@@ -1,8 +1,7 @@
 <?php
 /*
 
-Note: 
-I'm sure there's a much more elegant and standard way of including these files.
+Note: I'm sure there's a much more elegant and standard way of including these files.
 This is a gap in my php knowledge (something I'll do some research on).
 
 */
