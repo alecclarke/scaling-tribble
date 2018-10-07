@@ -18,12 +18,12 @@ class PlayerArrayReader implements PlayerReader {
         $kyle->salary = '28.7m';
         $players[] = $kyle;
 
-        $demar = new \stdClass();
-        $demar->name = 'Demar DeRozan';
-        $demar->age = 28;
-        $demar->job = 'Shooting Guard';
-        $demar->salary = '26.54m';
-        $players[] = $demar;
+        $kawhi = new \stdClass();
+        $kawhi->name = 'Kawhi Leonard';
+        $kawhi->age = 27;
+        $kawhi->job = 'Shooting Guard';
+        $kawhi->salary = '17.64m';
+        $players[] = $kawhi;
 
         $jakob = new \stdClass();
         $jakob->name = 'Jakob Poeltl';

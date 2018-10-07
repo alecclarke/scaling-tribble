@@ -17,7 +17,7 @@ echo "\t======Testing displaying from json (cli)=====\n";
 $playersObject->display(true, 'json');
 
 echo "\t======Testing displaying from file (cli)=====\n";
-$playersObject->display(true, 'file', 'playerdata.json');
+$playersObject->display(true, 'file', '../playerdata.json');
 
 echo "\t======Testing displaying from array (html)=====\n";
 $playersObject->display(false, 'array');
@@ -26,7 +26,7 @@ echo "\t======Testing displaying from json (html)=====\n";
 $playersObject->display(false, 'json');
 
 echo "\t======Testing displaying from file (html)=====\n";
-$playersObject->display(false, 'file', 'playerdata.json');
+$playersObject->display(false, 'file', '../playerdata.json');
 
 # Test PlayersObject#writePlayer
 # Note this test doesn't test if the player was written correctly as we can't access the instance vars (private at the moment) that hold player array values. This basically tests that nothing explodes when the variations are called.
