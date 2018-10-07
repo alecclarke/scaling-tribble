@@ -1,6 +1,6 @@
 <?php
 
-class PlayerArrayReader implements PlayerSourceReader {
+class PlayerArrayReader implements PlayerReader {
     public function read() {
         $players = [];
 

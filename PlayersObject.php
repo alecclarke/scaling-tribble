@@ -3,11 +3,11 @@
 
 Note: 
 I'm sure there's a much more elegant and standard way of including these files.
-This is a gap in my php knowledge.
+This is a gap in my php knowledge (something I'll do some research on).
 
 */
 spl_autoload_register(function ($class) {
-    include $class . '.php';
+    include 'factories/' . $class . '.php';
 });
 
 interface IReadWritePlayers {
@@ -23,11 +23,19 @@ class PlayersObject implements IReadWritePlayers {
     private $playerJsonString;
 
     public function __construct() {
-        //We're only using this if we're storing players as an array.
         $this->playersArray = [];
-
-        //We'll only use this one if we're storing players as a JSON string
         $this->playerJsonString = null;
+    }
+
+    /**
+     * @param $isCLI boolean for determining if the method is invoked from the command line.
+     * @param $source string Where we're retrieving the data from. 'json', 'array' or 'file'
+     * @param $filename string Only used if we're reading from file in 'file' mode
+     */
+    function display($isCLI, $source, $filename = null) {
+        $players = $this->readPlayers($source, $filename);
+        $view = PlayerViewFactory::getView($isCLI,$players);
+        $view->display();
     }
 
     /**
@@ -36,8 +44,8 @@ class PlayersObject implements IReadWritePlayers {
      * @return string json
      */
     function readPlayers($source, $filename = null) {
-        $sourceReader = SourceReaderFactory::getReader($source, $filename);
-        $playerData = $sourceReader->read();
+        $reader = PlayerReaderFactory::getReader($source, $filename);
+        $playerData = $reader->read();
 
         if (is_string($playerData)) {
             $playerData = json_decode($playerData);
@@ -71,13 +79,6 @@ class PlayersObject implements IReadWritePlayers {
     function setPlayerJsonString($playerJsonString) {
         $this->playerJsonString = $playerJsonString;
     }
-
-    function display($isCLI, $source, $filename = null) {
-        $players = $this->readPlayers($source, $filename);
-        $view = PlayerViewFactory::getView($isCLI,$players);
-        $view->display();
-    }
-
 }
 
 $playersObject = new PlayersObject();

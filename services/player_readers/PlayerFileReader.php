@@ -1,6 +1,6 @@
 <?php
 
-class PlayerFileReader implements PlayerSourceReader {
+class PlayerFileReader implements PlayerReader {
     private $filename;
 
     public function __construct($filename) {

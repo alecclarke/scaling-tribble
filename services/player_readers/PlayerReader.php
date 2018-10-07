@@ -1,6 +1,6 @@
 <?php
 
-interface PlayerSourceReader {
+interface PlayerReader {
     public function read();
 }
 

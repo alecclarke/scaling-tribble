@@ -1,5 +1,5 @@
 <?php
-require("PlayersObject.php");
+require("../PlayersObject.php");
 /*
 These end up being a visual test in console. 
 I'm sure there's a number of php test frameworks available, but I just some basic tests in place before I begin refactoring.

@@ -1,4 +1,7 @@
 <?php
+spl_autoload_register(function ($class) {
+    include '../services/player_writers/' . $class . '.php';
+});
 
 class PlayerWriterFactory {
   public static function getWriter($source, $player, $playersObject=null, $filename = null) {
